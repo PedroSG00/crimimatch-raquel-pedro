@@ -11,8 +11,8 @@ Developed by Raquel Tejada and Pedro Suárez
 | GET | /news/{id}/edit | Edit news form render |  |
 | POST | /news/{id}/edit | Edit news form handler |  |
 | POST | /news/{id}/delete | Delete new | |
-| GET | /api/news | News list | [x] |
-| GET | /api/news/{id} | News details | [x] |
+| GET | /api/news | News list | - [x] |
+| GET | /api/news/{id} | News details | - [x] |
 | GET | /news/{id}/create-comment | New comment form |  |
 | POST | /news/{id}/create-comment | New comment handler|  |
 | GET | /news/{id}/edit-comment | Edit comment form | |
