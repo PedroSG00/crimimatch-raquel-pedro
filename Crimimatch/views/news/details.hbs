@@ -1,0 +1,17 @@
+<div class="card text-center">
+    <div class="card-header">
+        New!
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{newsDetails.header}}</h5>
+        <img src="{{image}}" alt="An image">
+        <p class="card-text">{{newsDetails.body}}</p>
+        {{#if isAdmin}}
+        <a href="/news/{{newsDetails._id}}/edit" class="btn btn-success">Edit new</a>
+        <a href="/news/{{newsDetails._id}}/delete" class="btn btn-danger">Delete new</a>
+    </div>
+    {{/if}}
+    <div class="card-footer text-muted">
+        {{newsDetails.link}}
+    </div>
+</div>

@@ -4,6 +4,11 @@ Developed by Raquel Tejada and Pedro Suárez
 | HTTP METHOD | URI PATH | DESCRIPTION | JSON |
 | --- | --- | --- | --- |
 | GET | / | Index page |  |
+| GET | /auth/sign-up | Create user form | |
+| POST | /auth/sing-up | Create user handler | |
+| GET | /auth/log-in | Init session form | |
+| POST | /auth/log-in | Init session handler | |
+| POST | /auth/log-out | Exit session handler | --- |
 | GET | /news/create | News create form |  |
 | POST | /news/create | News create form handler |  |
 | GET | /news/list | News list render |  |
