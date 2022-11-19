@@ -14,10 +14,15 @@ Developed by Raquel Tejada and Pedro Suárez
 | GET | /api/news | News list | ✔️|
 | GET | /api/news/{id} | News details | ✔️ |
 | GET | /news/{id}/create-comment | New comment form |  |
-| POST | /news/{id}/create-comment | New comment handler|  |
+| POST | /news/{id}/create-comment | New comment handler |  |
 | GET | /news/{id}/edit-comment | Edit comment form | |
-| POST | /news/{id}/edit-comment | Edit comment handler| |
+| POST | /news/{id}/edit-comment | Edit comment handler | |
 | POST | /news/{id}/delete-comment | Delete comment form  |  |
+| GET | /wanted/api | Most wanted list render | |
+| GET | /wanted/api/{id} | Criminal details render | |
+| GET | /match | Get criminal match form render |  |
+| POST | /match | Criminal match form handler |  |
+
 
 
 
