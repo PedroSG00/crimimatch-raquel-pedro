@@ -2,15 +2,35 @@
     <div class="card-header">
         New!
     </div>
+
     <div class="card-body">
         <h5 class="card-title">{{newsDetails.header}}</h5>
         <img src="{{image}}" alt="An image">
         <p class="card-text">{{newsDetails.body}}</p>
+
         {{#if isAdmin}}
+
         <a href="/news/{{newsDetails._id}}/edit" class="btn btn-success">Edit new</a>
-        <a href="/news/{{newsDetails._id}}/delete" class="btn btn-danger">Delete new</a>
+        <form action="/news/{{newsDetails._id}}/delete" method="POST">
+            <input type="submit" value="Delete New" class="btn btn-danger m-3">
+        </form>
     </div>
+
     {{/if}}
+
+
+    {{#if isUser}}
+
+    <form action=" /news/{{newsDetails._id}}/create-comment" method="POST">
+        <div class="mb-3">
+            <textarea class="form-control" id="comment" rows="2" placeholder="Write a comment!"></textarea>
+            <input type="submit" value="Submit comment" class="btn btn-light m-3">
+        </div>
+    </form>
+
+    {{/if}}
+
+
     <div class="card-footer text-muted">
         {{newsDetails.link}}
     </div>

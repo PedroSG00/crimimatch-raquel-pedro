@@ -46,11 +46,13 @@ router.post('/log-in', (req, res, next) => {
 })
 
 
-router.post('/log-out', (res, req, next) => {
+router.post('/log-out', (req, res, next) => {
     req.session.destroy(() => {
-        res.redirect('/')
+        res.redirect('/auth/log-in')
     })
 })
+
+
 
 
 module.exports = router;
