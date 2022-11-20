@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 const newsSchema = new Schema(
     {
@@ -21,10 +21,10 @@ const newsSchema = new Schema(
             type: String,
         },
 
-        // comments: {
-        //     type: mongoose.Types.ObjectId,
-        //     ref: 'Comments'
-        // },
+        comments: [{
+            type: Types.ObjectId,
+            ref: 'Comments'
+        }],
     },
 
     {

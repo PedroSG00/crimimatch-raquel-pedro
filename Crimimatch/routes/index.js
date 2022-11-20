@@ -10,6 +10,10 @@ module.exports = app => {
     const newsRouter = require('./news.routes')
     app.use('/news', newsRouter)
 
+    const commentsRouter = require('./comment.routes')
+    app.use('/news', newsRouter)
+
+
 
 }
 

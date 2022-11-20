@@ -18,10 +18,14 @@
 
     {{/if}}
 
-
     {{#if isUser}}
 
-    <form action=" /news/{{newsDetails._id}}/create-comment" method="POST">
+    {{#each comments}}
+    <h3>{{text}}</h3>
+    {{/each }}
+
+
+    <form action=" /news/{{newsDetails._id}}" method="POST">
         <div class="mb-3">
             <textarea class="form-control" id="comment" rows="2" placeholder="Write a comment!"></textarea>
             <input type="submit" value="Submit comment" class="btn btn-light m-3">

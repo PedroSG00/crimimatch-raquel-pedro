@@ -40,6 +40,7 @@ router.get('/:id', loggedIn, (req, res, next) => {
 
     News
         .findById(news_Id)
+        .populate('comments')
         .then(newsDetails => {
             // console.log(newsDetails)
             res.render('news/details', {

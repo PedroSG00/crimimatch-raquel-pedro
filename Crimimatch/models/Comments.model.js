@@ -1,10 +1,10 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 const commentsSchema = new Schema(
     {
         author: {
-            type: mongoose.Types.ObjectId,
-            ref: User
+            type: Types.ObjectId,
+            ref: 'User'
         },
 
         text: {
@@ -19,7 +19,7 @@ const commentsSchema = new Schema(
     }
 );
 
-const Comments = model("Commets", commentsSchema);
+const Comments = model("Comments", commentsSchema);
 
 module.exports = Comments;
 
