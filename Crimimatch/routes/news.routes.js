@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User.model')
 const News = require('../models/News.model')
+const Comments = require('../models/Comments.model')
 const { loggedIn, loggedOut, checkRoles } = require('../middleware/route-guard')
 
 router.get('/create', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
@@ -32,7 +33,7 @@ router.get('/list', loggedIn, (req, res, next) => {
             res.render('news/list', { news })
         })
 
-});
+})
 
 router.get('/:id', loggedIn, (req, res, next) => {
     const { id: news_Id } = req.params
@@ -51,6 +52,18 @@ router.get('/:id', loggedIn, (req, res, next) => {
         })
 })
 
+router.post('/:id', (req, res, next) => {
+    const { id: news_Id } = req.params
+    const { author, text } = req.body
+
+    Comments
+        .create(news_Id, { author, text })
+        .then(() => {
+            res.redirect('/')
+        })
+        .catch(err => console.log(err))
+})
+
 router.post('/:id/delete', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
 
     const { id: news_Id } = req.params
@@ -65,7 +78,6 @@ router.post('/:id/delete', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
 
         })
         .catch(err => console.log(err))
-
 })
 
 router.get('/:id/edit', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
@@ -91,6 +103,7 @@ router.post('/:id/edit', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
         .catch(err => console.log(err))
 
 })
+
 
 
 
