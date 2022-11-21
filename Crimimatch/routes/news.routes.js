@@ -41,9 +41,14 @@ router.get('/:id', loggedIn, (req, res, next) => {
 
     New
         .findById(news_Id)
-        .populate('comments')
+        .populate({
+            path: 'comments',
+            populate: {
+                path: 'author'
+            }
+        })
         .then(newsDetails => {
-            console.log('HOLA', newsDetails.comments.length)
+            console.log('HOLA', newsDetails)
             res.render('news/details', {
                 newsDetails,
                 isAdmin: req.session.currentUser.role === 'ADMIN',

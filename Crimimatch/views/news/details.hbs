@@ -19,10 +19,19 @@
     {{/if}}
 
     {{#if isUser}}
-    {{#each newsDetails.comments}}
-    <h3>{{author.username}}</h3>
-    <p>{{text}}</p>
-    {{/each }}
+    <div>
+        <h4>Comments</h4>
+        {{#each newsDetails.comments}}
+        <hr>
+        <h5>{{author.username}}</h5>
+        <p>{{text}}</p>
+
+        <form action="/news/{{newsDetails._id}}/delete-comment" method="POST">
+            <input type="submit" value="Delete comment" class="btn btn-danger btn-sm">
+        </form>
+        {{/each }}
+    </div>
+
 
 
     <form action=" /news/{{newsDetails._id}}" method="POST">

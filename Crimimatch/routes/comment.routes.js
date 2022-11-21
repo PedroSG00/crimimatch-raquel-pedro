@@ -14,13 +14,13 @@ router.post('/:id', (req, res, next) => {
 
     Comment
         .create({ author: req.session.currentUser._id, text })
+
         .then((newComment) => {
             return New.findByIdAndUpdate(news_Id, { $push: { comments: newComment._id } })
         })
         .then(res.redirect(`/news/${news_Id}`))
         .catch(err => console.log(err))
 })
-
 
 
 module.exports = router;
