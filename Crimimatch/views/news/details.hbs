@@ -19,15 +19,16 @@
     {{/if}}
 
     {{#if isUser}}
-
-    {{#each comments}}
-    <h3>{{text}}</h3>
+    {{#each newsDetails.comments}}
+    <h3>{{author.username}}</h3>
+    <p>{{text}}</p>
     {{/each }}
 
 
     <form action=" /news/{{newsDetails._id}}" method="POST">
         <div class="mb-3">
-            <textarea class="form-control" id="comment" rows="2" placeholder="Write a comment!"></textarea>
+            <textarea type='text' class="form-control" id="text" rows="2" placeholder="Write a comment!"
+                name="text"></textarea>
             <input type="submit" value="Submit comment" class="btn btn-light m-3">
         </div>
     </form>

@@ -11,7 +11,7 @@ module.exports = app => {
     app.use('/news', newsRouter)
 
     const commentsRouter = require('./comment.routes')
-    app.use('/news', newsRouter)
+    app.use('/news', commentsRouter)
 
 
 

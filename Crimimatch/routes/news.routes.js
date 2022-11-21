@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User.model')
-const News = require('../models/News.model')
-const Comments = require('../models/Comments.model')
+const New = require('../models/New.model')
+const Comments = require('../models/Comment.model')
 const { loggedIn, loggedOut, checkRoles } = require('../middleware/route-guard')
 
 router.get('/create', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
@@ -13,9 +13,9 @@ router.post('/create', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
 
     const { header, image, body, link } = req.body
 
-    News
+    New
         .create({ header, image, body, link })
-        .then(news => {
+        .then(() => {
             // console.log(news)
             res.redirect('/news/list')
         })
@@ -26,7 +26,7 @@ router.post('/create', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
 
 router.get('/list', loggedIn, (req, res, next) => {
 
-    News
+    New
         .find()
         .select({ header: 1 })
         .then(news => {
@@ -39,11 +39,11 @@ router.get('/:id', loggedIn, (req, res, next) => {
     const { id: news_Id } = req.params
 
 
-    News
+    New
         .findById(news_Id)
         .populate('comments')
         .then(newsDetails => {
-            // console.log(newsDetails)
+            console.log('HOLA', newsDetails.comments.length)
             res.render('news/details', {
                 newsDetails,
                 isAdmin: req.session.currentUser.role === 'ADMIN',
@@ -52,24 +52,12 @@ router.get('/:id', loggedIn, (req, res, next) => {
         })
 })
 
-router.post('/:id', (req, res, next) => {
-    const { id: news_Id } = req.params
-    const { author, text } = req.body
-
-    Comments
-        .create(news_Id, { author, text })
-        .then(() => {
-            res.redirect('/')
-        })
-        .catch(err => console.log(err))
-})
-
 router.post('/:id/delete', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
 
     const { id: news_Id } = req.params
     console.log(news_Id)
 
-    News
+    New
         .findByIdAndDelete(news_Id)
         .then(() => {
 
@@ -78,12 +66,13 @@ router.post('/:id/delete', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
 
         })
         .catch(err => console.log(err))
+
 })
 
 router.get('/:id/edit', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
     const { id: news_Id } = req.params
 
-    News
+    New
         .findByIdAndUpdate(news_Id)
         .then(newsDetails => {
             res.render('news/edit', newsDetails)
@@ -95,7 +84,7 @@ router.post('/:id/edit', loggedIn, checkRoles('ADMIN'), (req, res, next) => {
     const { header, image, body, link } = req.body
     const { id: news_Id } = req.params
 
-    News
+    New
         .findByIdAndUpdate(news_Id, { header, image, body, link })
         .then(() => {
             res.redirect(`/news/${news_Id}`)

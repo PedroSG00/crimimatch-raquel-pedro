@@ -1,6 +1,6 @@
 const { Schema, model, Types } = require("mongoose");
 
-const newsSchema = new Schema(
+const newSchema = new Schema(
     {
         header: {
             type: String,
@@ -23,7 +23,7 @@ const newsSchema = new Schema(
 
         comments: [{
             type: Types.ObjectId,
-            ref: 'Comments'
+            ref: 'Comment'
         }],
     },
 
@@ -32,9 +32,9 @@ const newsSchema = new Schema(
     }
 );
 
-const News = model("News", newsSchema);
+const New = model("New", newSchema);
 
-module.exports = News;
+module.exports = New;
 
 
 
