@@ -9,19 +9,15 @@ const { loggedIn, loggedOut, checkRoles } = require('../middleware/route-guard')
 router.post('/:id', (req, res, next) => {
 
     const { id: news_Id } = req.params
-    const { author, text } = req.body
+    const { text } = req.body
+    // const { comments } = req.body
 
     Comment
         .create({ author: req.session.currentUser._id, text })
-        .then(createdComment => {
-
-            New
-                .findByIdAndUpdate(news_Id, { author: req.session.currentUser._id, text })
-                .then((commentedNew) => {
-                    return (commentedNew)
-                })
+        .then((newComment) => {
+            return New.findByIdAndUpdate(news_Id, { $push: { comments: newComment._id } })
         })
-        .then(res.redirect(`/${news_Id}`))
+        .then(res.redirect(`/news/${news_Id}`))
         .catch(err => console.log(err))
 })
 
