@@ -13,7 +13,8 @@ module.exports = app => {
     const commentsRouter = require('./comment.routes')
     app.use('/news', commentsRouter)
 
-
+    const criminalRouter = require('./criminals.routes')
+    app.use('/wanted', criminalRouter)
 
 }
 
