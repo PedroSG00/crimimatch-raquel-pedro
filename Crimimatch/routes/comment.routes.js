@@ -22,6 +22,21 @@ router.post('/:id', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
+router.post('/:comment_id/delete-comment', (req, res, next) => {
+
+    const { comment_id } = req.params
+
+    Comment
+        .findByIdAndDelete(comment_id)
+        .then((deletedComment) => {
+            console.log('---------------------------------', deletedComment._id, '----------------------------------')
+            return New.findByIdAndDelete({ comments: deletedComment._id })
+        })
+        .then(res.redirect(`/news/list`))
+        .catch(err => console.log(err))
+
+})
+
 
 module.exports = router;
 
