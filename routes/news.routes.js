@@ -49,10 +49,16 @@ router.get('/:id', loggedIn, (req, res, next) => {
         })
         .then(newsDetails => {
             // console.log('HOLA', newsDetails)
+            const updatedComments = newsDetails.comments.map(comment => {
+                req.session.currentUser._id === comment.author._id.toString() || req.session.currentUser.role === 'ADMIN' ? comment.isUser = true : comment.isUser = false
+                return comment
+            })
+
+            newsDetails.comments = updatedComments
+
             res.render('news/details', {
                 newsDetails,
-                isAdmin: req.session.currentUser.role === 'ADMIN',
-                isUser: req.session.currentUser.role === 'USER'
+                isAdmin: req.session.currentUser.role === 'ADMIN'
             })
         })
 })
