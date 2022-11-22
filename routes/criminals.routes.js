@@ -4,26 +4,13 @@ const axios = require('axios')
 const criminalApi = require('./../services/criminal-api.service')
 const Api = new criminalApi()
 
-
-// TRAER INFO DE LA API
-
 router.get('/api', (req, res, next) => {
-
-    fetch('https://api.fbi.gov/wanted/v1/list')
-        .then(res => res.json())
+    axios.get('https://api.fbi.gov/wanted')
         .then(responseFromAPI => {
-            // console.log('RESPONSE------------------------------------', responseFromAPI.items)
-            const arr = responseFromAPI.items
-            res.render('criminal/list', { arr })
+            console.log('RESPONSE', responseFromAPI.data)
+            res.render('criminal/list', { total: responseFromAPI.data })
         })
-        .catch(err => console.error(err))
-})
-
-//LISTADO
-
-router.get('/', (req, res, next) => {
-
-    const { title } = req.body
+        .catch(err => console.error('ERROR', err))
 })
 
 

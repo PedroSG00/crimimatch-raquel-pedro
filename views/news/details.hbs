@@ -26,9 +26,16 @@
         <h5>{{author.username}}</h5>
         <p>{{text}}</p>
 
-        <form action="/news/{{_id}}/delete-comment" method="POST">
-            <input type="submit" value="Delete comment" class="btn btn-danger btn-sm">
-        </form>
+        <div class="d-flex justify-content-center m-2">
+            <form action="/news/{{../newsDetails._id}}/{{_id}}/delete-comment" method="POST">
+                <input type="submit" value="Delete comment" class="btn btn-danger btn-sm me-1">
+            </form>
+
+            <form action="/news/{{../newsDetails._id}}/{{_id}}/update-comment" method="POST">
+                <a type="submit" value="Update comment" class="btn btn-success btn-sm">
+            </form>
+        </div>
+
         {{/each }}
     </div>
 

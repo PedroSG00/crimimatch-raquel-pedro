@@ -22,21 +22,25 @@ router.post('/:id', (req, res, next) => {
         .catch(err => console.log(err))
 })
 
-router.post('/:comment_id/delete-comment', (req, res, next) => {
+router.post('/:news_Id/:comment_Id/delete-comment', (req, res, next) => {
 
-    const { comment_id } = req.params
+
+    const { news_Id, comment_Id } = req.params
+    // console.log('----------------------', newsId)
 
     Comment
-        .findByIdAndDelete(comment_id)
+        .findByIdAndDelete(comment_Id)
         .then((deletedComment) => {
-            console.log('---------------------------------', deletedComment._id, '----------------------------------')
-            return New.findByIdAndDelete({ comments: deletedComment._id })
+            // console.log('---------------------------------', deletedComment, '----------------------------------')
+            return New.findByIdAndUpdate(news_Id, { $pull: { comments: deletedComment._id } })
         })
-        .then(res.redirect(`/news/list`))
+        .then(res.redirect(`/news/${news_Id}`))
         .catch(err => console.log(err))
 
 })
 
+
+// router.get()
 
 module.exports = router;
 
