@@ -48,7 +48,7 @@ router.get('/:id', loggedIn, (req, res, next) => {
             }
         })
         .then(newsDetails => {
-            console.log('HOLA', newsDetails)
+            // console.log('HOLA', newsDetails)
             res.render('news/details', {
                 newsDetails,
                 isAdmin: req.session.currentUser.role === 'ADMIN',
