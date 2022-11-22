@@ -4,7 +4,7 @@ class ApiService {
 
     constructor() {
         this.axiosApp = axios.create({
-            baseURL: 'https://api.fbi.gov/wanted'
+            baseURL: 'https://api.fbi.gov/wanted/v1/list'
         })
     }
 
