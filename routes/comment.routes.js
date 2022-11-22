@@ -40,6 +40,8 @@ router.post('/:news_Id/:comment_Id/delete-comment', (req, res, next) => {
 })
 
 
+// router.get()
+
 module.exports = router;
 
 
