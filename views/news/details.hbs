@@ -31,12 +31,12 @@
                 <input type="submit" value="Delete comment" class="btn btn-danger btn-sm me-1">
             </form>
 
-            <form action="/news/{{../newsDetails._id}}/{{_id}}/update-comment" method="POST">
-                <a type="submit" value="Update comment" class="btn btn-success btn-sm">
-            </form>
+            <a href="/news/{{../newsDetails._id}}/{{_id}}/edit-comment" class="btn btn-success btn-sm">Update
+                comment</a>
+
         </div>
 
-        {{/each }}
+        {{/each}}
     </div>
 
 

@@ -6,15 +6,15 @@ const Comment = require('../models/Comment.model')
 const { loggedIn, loggedOut, checkRoles } = require('../middleware/route-guard')
 
 
-router.post('/:id', (req, res, next) => {
+router.post('/:news_Id', (req, res, next) => {
 
-    const { id: news_Id } = req.params
+    const { news_Id } = req.params
     const { text } = req.body
     // const { comments } = req.body
 
+
     Comment
         .create({ author: req.session.currentUser._id, text })
-
         .then((newComment) => {
             return New.findByIdAndUpdate(news_Id, { $push: { comments: newComment._id } })
         })
@@ -40,7 +40,39 @@ router.post('/:news_Id/:comment_Id/delete-comment', (req, res, next) => {
 })
 
 
-// router.get()
+router.get('/:news_Id/:comment_Id/edit-comment', (req, res, next) => {
+
+    const { news_Id, comment_Id } = req.params
+    const promises = [New.findById(news_Id), Comment.findById(comment_Id)]
+
+    Promise
+        .all(promises)
+        .then(responses => {
+
+            const news = responses[0]
+            const comment = responses[1]
+
+            res.render('news/edit-comment', { news, comment })
+        })
+
+})
+
+router.post('/:news_Id/:comment_Id/edit-comment', (req, res, next) => {
+
+
+    const { news_Id, comment_Id } = req.params
+
+    Comment
+        .findByIdAndUpdate(comment_Id)
+        .then((updatedComment) => {
+
+            console.log('--------------------------------------------------------', news_Id)
+            return New.findByIdAndUpdate(news_Id, { comment: updatedComment._id })
+        })
+        .then(res.redirect(`/news/${news_Id}`))
+        .catch(err => console.log(err))
+
+})
 
 module.exports = router;
 
